@@ -5,14 +5,26 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-typedef struct simulation t_simulation;
+typedef struct s_simulation t_simulation;
+typedef struct s_coder t_coder;
 
-typedef struct dongle
+typedef struct s_heap
 {
-	// NOT DONE YET
+	t_coder		**info;
+	int		capacity;
+	int		size;
+} t_heap;
+
+typedef struct s_dongle
+{
+	pthread_mutex_t	dongle_mutex;
+	pthread_cond_t	cond_var;
+	bool		in_use;
+	size_t		last_released_time;
+	t_heap		*waitlist;
 } t_dongle;
 
-typedef struct coder
+typedef struct s_coder
 {
 	int		coder_id;
 	pthread_t	thread;
@@ -24,7 +36,7 @@ typedef struct coder
 	pthread_mutex_t	coder_mutex;
 } t_coder;
 
-typedef struct simulation
+typedef struct s_simulation
 {
 	int		time_to_burnout;
 	int		time_to_compile;
