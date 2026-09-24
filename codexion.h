@@ -1,9 +1,10 @@
 #ifndef CODEXION_H
 # define CODEXION_H
 
-#include <stddef.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <pthread.h>
+#include <stdio.h>
 
 typedef struct s_simulation t_simulation;
 typedef struct s_coder t_coder;
